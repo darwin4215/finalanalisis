@@ -1,0 +1,81 @@
+.login-page-unique {
+    display: flex;
+    height: 100vh;
+    background-image: url('https://i.pinimg.com/736x/6d/a5/18/6da518b6d5f8046be57c4ba9ec64925c.jpg');
+    background-size: cover;
+    background-position: center;
+    justify-content: space-between;
+    padding: 0 100px;
+  }
+  
+  .left-section-unique {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+  }
+  
+  .welcome-text-unique {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-description-unique {
+    margin-top: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .right-section-unique {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .right-section-unique input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .signin-button-unique {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  .signin-button-unique:hover {
+    background-color: #e65a00;
+  }
+  /*estilos boton create*/
+  .create-account-button-unique {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  .create-account-button-unique:hover {
+    background-color: #0056b3;
+  }
+  
