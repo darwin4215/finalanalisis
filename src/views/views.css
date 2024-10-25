@@ -111,7 +111,7 @@
   max-width: 600px;
   margin: 40px auto;
   padding: 30px;
-  background-color: #ffffff;
+  background-color: #ddd;
   border-radius: 12px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.5s ease-out;
@@ -242,4 +242,12 @@
   background-position: right 12px center;
   background-size: 12px 12px;
   padding-right: 40px;
+}
+
+/* Fondo de imagen para la página completa */
+body.report-page-background {
+  background-image: url('https://i.pinimg.com/564x/aa/df/d7/aadfd7e3da1de865640579b0bdeb6062.jpg'); /* Coloca aquí el enlace de tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

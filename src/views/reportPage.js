@@ -18,7 +18,11 @@ const ReportPage = () => {
     metodoContacto: '',
     horarioContacto: '',
   });
-
+  useEffect(() => {
+    document.body.classList.add('report-page-background');
+    return () => document.body.classList.remove('report-page-background');
+  }, []);
+  
     // Obtener el usuarioId desde sessionStorage cuando se carga la página
     useEffect(() => {
       const storedUserId = sessionStorage.getItem('userId');
