@@ -4,6 +4,50 @@ import axios from 'axios';
 import './views.css'; // Importar los estilos
 
 const ReportPage = () => {
+  const [formData, setFormData] = useState({
+    usuarioId: '', 
+    numeroCuenta: '',
+    tipoServicio: 'Internet',
+    descripcionProblema: '',
+    tipoProblema: '',
+    fechaIncidente: '',
+    frecuencia: '',
+    dispositivosAfectados: '',
+    reinicioModem: '',
+    pasosTomados: '',
+    metodoContacto: '',
+    horarioContacto: '',
+  });
+
+    // Obtener el usuarioId desde sessionStorage cuando se carga la página
+    useEffect(() => {
+      const storedUserId = sessionStorage.getItem('userId');
+      if (storedUserId) {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          usuarioId: storedUserId  // Asignar el ID del usuario al formulario
+        }));
+      }
+    }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:3001/submitReport', formData);
+      console.log('Respuesta del servidor:', response.data);
+      alert('Reporte enviado con éxito');
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      alert('Hubo un error al enviar el reporte');
+    }
+  };
+
   return (
     <div className="report-page">
       <h1 className="title">Reporte de Problemas de Servicio</h1>
