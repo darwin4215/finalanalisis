@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './views.css'; 
+import './views.css'; // Importa los estilos específicos para TaskTech
 
 const TaskTech = () => {
     const [tasks, setTasks] = useState([]);
-    
-    // Recuperar el userId del sessionStorage
     const userId = sessionStorage.getItem('userId'); 
 
     useEffect(() => {
-        if (userId) {  // Verificar que userId no sea null
+        if (userId) {
             const fetchTasks = async () => {
                 try {
                     const response = await axios.get('http://localhost:3001/getTechnicalTasks', {
@@ -28,8 +26,8 @@ const TaskTech = () => {
     }, [userId]);
 
     return (
-        <div>
-            <h2>Tareas Técnicas Asignadas</h2>
+        <div className="task-container">
+            <h2 className="task-header">Tareas Técnicas Asignadas</h2>
             {tasks.length > 0 ? (
                 tasks.map(task => (
                     <div key={task.ticket_id} className="ticket-card">
@@ -38,7 +36,9 @@ const TaskTech = () => {
                         <p><strong>Tipo de problema:</strong> {task.TipoProblema}</p>
                         <p><strong>Fecha del Incidente:</strong> {task.FechaIncidente}</p>
                         <p><strong>Frecuencia:</strong> {task.Frecuencia}</p>
-                        <p><strong>Status:</strong> {task.Status}</p>
+                        <p className={`ticket-status ${task.Status.toLowerCase().replace(' ', '-')}`}>
+                            {task.Status}
+                        </p>
                         <p><strong>Fecha de Asignación:</strong> {task.assigned_date}</p>
                     </div>
                 ))

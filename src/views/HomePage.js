@@ -59,6 +59,13 @@ const HomePage = () => {
               </div>
             </>
           )}
+          {userRole === 'Tecnico' && (
+            <>
+              <div className="card card-conversations" onClick={() => navigate('/tasktech')}>
+                <h3>Mis Tareas</h3>
+              </div>
+            </>
+          )}
         </section>
       </main>
 
