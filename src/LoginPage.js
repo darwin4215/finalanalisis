@@ -43,6 +43,9 @@ const LoginPage = () => {
 
         // Aquí guardamos el rol del usuario en sessionStorage o localStorage (según prefieras)
         sessionStorage.setItem('userRole', data.user.role);
+        sessionStorage.setItem('userId', data.user.ID);
+
+        setLoginMessage(`Inicio de sesión exitoso, bienvenido ${data.user.UserName}`);
 
         // Redirigir a la página de inicio, puedes cambiar esta ruta según tu configuración de rutas
         navigate('/homepage', { state: { role: data.user.role } });

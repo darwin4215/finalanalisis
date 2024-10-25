@@ -51,10 +51,10 @@ const HomePage = () => {
           {/* Solo mostrar estas cards si el usuario es admin */}
           {userRole === 'admin' && (
             <>
-              <div className="card card-conversations">
+              <div className="card card-conversations" onClick={() => navigate('/bandreports')}>
                 <h3>Bandeja Reportes</h3>
               </div>
-              <div className="card card-conversations">
+              <div className="card card-conversations" onClick={() => navigate('/pamientras')}>
                 <h3>Mientras Tanto</h3>
               </div>
             </>

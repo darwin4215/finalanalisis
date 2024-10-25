@@ -1,6 +1,6 @@
 // src/views/ChatBox.js
 import React, { useState } from "react";
-import "./ChatBox.css";
+import "./views.css";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);

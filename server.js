@@ -85,6 +85,55 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Ruta para recibir y almacenar los datos del formulario de reportes
+app.post('/submitReport', async (req, res) => {
+    const {
+        usuarioId,
+        numeroCuenta,
+        tipoServicio,
+        descripcionProblema,
+        tipoProblema,
+        fechaIncidente,
+        frecuencia,
+        dispositivosAfectados,
+        reinicioModem,
+        pasosTomados,
+        metodoContacto,
+        horarioContacto
+    } = req.body;
+
+    try {
+        // Conectar a la base de datos
+        let pool = await sql.connect(config);
+
+        // Insertar los datos en la tabla 'Reportes'
+        await pool.request()
+            .input('usuarioId', sql.Int, usuarioId)
+            .input('numeroCuenta', sql.VarChar, numeroCuenta)
+            .input('tipoServicio', sql.VarChar, tipoServicio)
+            .input('descripcionProblema', sql.VarChar, descripcionProblema)
+            .input('tipoProblema', sql.VarChar, tipoProblema)
+            .input('fechaIncidente', sql.DateTime, fechaIncidente)
+            .input('frecuencia', sql.VarChar, frecuencia)
+            .input('dispositivosAfectados', sql.VarChar, dispositivosAfectados)
+            .input('reinicioModem', sql.Bit, reinicioModem)
+            .input('pasosTomados', sql.VarChar, pasosTomados)
+            .input('metodoContacto', sql.VarChar, metodoContacto)
+            .input('horarioContacto', sql.VarChar, horarioContacto)
+            .query(`
+                INSERT INTO Reportes (UsuarioId, NumeroCuenta, TipoServicio, DescripcionProblema, TipoProblema, FechaIncidente, Frecuencia, DispositivosAfectados, ReinicioModem, PasosTomados, MetodoContacto, HorarioContacto)
+                VALUES (@usuarioId, @numeroCuenta, @tipoServicio, @descripcionProblema, @tipoProblema, @fechaIncidente, @frecuencia, @dispositivosAfectados, @reinicioModem, @pasosTomados, @metodoContacto, @horarioContacto)
+            `);
+
+        // Si la inserción es exitosa, enviamos una respuesta
+        res.status(200).json({ message: 'Reporte guardado exitosamente' });
+    } catch (err) {
+        console.error('Error al insertar el reporte:', err);
+        res.status(500).json({ message: 'Error al guardar el reporte' });
+    }
+});
+
+
 // Iniciar el servidor en el puerto 3001
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);

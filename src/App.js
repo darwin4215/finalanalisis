@@ -5,6 +5,9 @@ import LoginPage from './LoginPage';
 import HomePage from './views/HomePage';
 import ReportPage from './views/reportPage';
 import StillReport from './views/stillreport';
+import BandReport from './views/bandreports';
+import PaMientra from './views/pamientras';
+
 
 function App() {
   return (
@@ -14,6 +17,8 @@ function App() {
         <Route path="/homepage" element={<HomePage />} /> 
         <Route path="/reportPage" element={<ReportPage />} />
         <Route path='/stillReport' element={<StillReport />} />
+        <Route path='/bandReports' element={<BandReport />} />
+        <Route path='/pamientras' element={< PaMientra />} />
       </Routes>
     </Router>
     
