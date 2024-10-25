@@ -54,15 +54,8 @@ const HomePage = () => {
               <div className="card card-conversations" onClick={() => navigate('/bandreports')}>
                 <h3>Bandeja Reportes</h3>
               </div>
-              <div className="card card-conversations" onClick={() => navigate('/pamientras')}>
-                <h3>Chat WhatsApp</h3>
-              </div>
-            </>
-          )}
-          {userRole === 'Tecnico' && (
-            <>
-              <div className="card card-conversations" onClick={() => navigate('/tasktech')}>
-                <h3>Mis Tareas</h3>
+              <div className="card card-conversations">
+                <h3>Mientras Tanto</h3>
               </div>
             </>
           )}
