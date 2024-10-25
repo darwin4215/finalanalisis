@@ -15,8 +15,8 @@ app.use(cors());
 
 // Configuración de conexión a SQL Server
 const config = {
-    user: 'dar',
-    password: 'dar12345',
+    user: 'sa',
+    password: 'sa123',
     server: 'localhost',
     database: 'pfinalas',
     options: {
@@ -26,7 +26,7 @@ const config = {
 };
 
 // Clave secreta de reCAPTCHA
-const RECAPTCHA_SECRET_KEY = '6LddtmIqAAAAAH2KhxkkK8VWJjojEspMhd7KEpa1';  // Reemplaza con tu clave secreta
+const RECAPTCHA_SECRET_KEY = '6LddtmIqAAAAAH2KhxkkK8VWJjojEspMhd7KEpa1';
 
 // Función para validar el token de reCAPTCHA
 async function verifyCaptcha(token) {
@@ -53,10 +53,11 @@ async function authenticateUser(username, password) {
         let result = await pool.request()
             .input('username', sql.VarChar, username)
             .input('password', sql.VarChar, password)
-            .query('SELECT * FROM Usuarios WHERE UserName = @username AND contraseña = @password');
+            // Asegúrate de seleccionar el campo 'role' aquí
+            .query('SELECT ID, UserName, role FROM Usuarios WHERE UserName = @username AND contraseña = @password');
 
         if (result.recordset.length > 0) {
-            return { success: true, user: result.recordset[0] };  // Usuario encontrado
+            return { success: true, user: result.recordset[0] };  // Usuario encontrado con el rol
         } else {
             return { success: false, message: 'Usuario o contraseña incorrectos' };  // No encontrado
         }

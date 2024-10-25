@@ -38,8 +38,14 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // Almacenar el rol del usuario y redirigir a la página principal
         setLoginMessage(`Inicio de sesión exitoso, bienvenido ${data.user.UserName}`);
-        navigate('/homepage');
+
+        // Aquí guardamos el rol del usuario en sessionStorage o localStorage (según prefieras)
+        sessionStorage.setItem('userRole', data.user.role);
+
+        // Redirigir a la página de inicio, puedes cambiar esta ruta según tu configuración de rutas
+        navigate('/homepage', { state: { role: data.user.role } });
       } else {
         setLoginMessage(data.message);
       }
@@ -51,7 +57,7 @@ const LoginPage = () => {
   return (
     <div className="login-page-unique">
       <div className="left-section-unique">
-        <h1 className="welcome-text-unique">Welcome Back To EXA&D</h1>
+        <h1 className="welcome-text-unique">Welcome Back To EXPA&D</h1>
         <p className="welcome-description-unique">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of using.
@@ -84,7 +90,7 @@ const LoginPage = () => {
 
           {/* Integración de reCAPTCHA */}
           <ReCAPTCHA
-            sitekey="6LddtmIqAAAAAH2KhxkkK8VWJjojEspMhd7KEpa1" // Reemplaza esto con tu clave del sitio de Google reCAPTCHA
+            sitekey="6LddtmIqAAAAAH2KhxkkK8VWJjojEspMhd7KEpa1" 
             onChange={handleCaptchaChange}
           />
 
