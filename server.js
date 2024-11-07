@@ -133,7 +133,213 @@ app.post('/submitReport', async (req, res) => {
     }
 });
 
+app.get('/getReportes', async (req, res) => {
+    const { userId } = req.query;  // Obtener el userId de los parámetros de la solicitud
+  
+    // Verificar que userId sea un número válido
+    if (!userId || isNaN(userId)) {
+      return res.status(400).json({ error: 'userId inválido' });
+    }
+  
+    try {
+      let pool = await sql.connect(config);
+      
+      // Filtrar los reportes por el UsuarioId
+      let result = await pool.request()
+        .input('userId', sql.Int, userId)  // Filtrar por UsuarioId
+        .query(`
+          SELECT 
+            R.Id,
+            R.DescripcionProblema,
+            R.TipoProblema,
+            R.FechaIncidente,
+            R.Frecuencia,
+            R.FechaReporte,
+            R.Status,
+            U.UserName
+          FROM 
+            Reportes R
+          INNER JOIN 
+            Usuarios U
+          ON 
+            R.UsuarioId = U.Id
+          WHERE 
+            R.UsuarioId = @userId;  
+        `);
+  
+      // Devuelve los resultados al frontend
+      res.json(result.recordset);
+    } catch (error) {
+      console.error('Error al obtener los reportes:', error);
+      res.status(500).json({ error: 'Error al obtener los reportes' });
+    }
+  });
+  
+/*funcion para obtener todos los reportes sin restriccion de ID*/
+  app.get('/getTicket', async (req, res) => {
+    const { userId } = req.query;  // Obtener el userId de los parámetros de la solicitud, si está presente
+  
+    try {
+      let pool = await sql.connect(config);
+  
+      // Construir la consulta SQL con o sin filtro por userId
+      let query = `
+        SELECT 
+          R.Id,
+          R.DescripcionProblema,
+          R.TipoProblema,
+          R.FechaIncidente,
+          R.Frecuencia,
+          R.FechaReporte,
+          R.Status,
+          U.UserName
+        FROM 
+          Reportes R
+        INNER JOIN 
+          Usuarios U
+        ON 
+          R.UsuarioId = U.Id
+      `;
+  
+      // Agregar filtro si userId está presente en la solicitud
+      if (userId && !isNaN(userId)) {
+        query += ` WHERE R.UsuarioId = @userId`;
+      }
+  
+      let request = pool.request();
+      
+      // Si hay un userId válido, se agrega como parámetro de entrada
+      if (userId && !isNaN(userId)) {
+        request.input('userId', sql.Int, userId);
+      }
+  
+      // Ejecutar la consulta
+      let result = await request.query(query);
+  
+      // Devolver los resultados al frontend
+      res.json(result.recordset);
+    } catch (error) {
+      console.error('Error al obtener los reportes:', error);
+      res.status(500).json({ error: 'Error al obtener los reportes' });
+    }
+  });
+  
 
+  /*funcion para mostrar la lista de tecnicos dentro del ticket */
+  app.get('/getTechnicians', async (req, res) => {
+    try {
+      // Conectar a la base de datos
+      let pool = await sql.connect(config);
+  
+      // Ejecutar la consulta para obtener los usuarios con rol de Técnico
+      let result = await pool.request().query(`
+        SELECT ID, UserName AS name
+        FROM Usuarios
+        WHERE role = 'Tecnico'
+      `);
+  
+      // Devolver la lista de técnicos al frontend
+      res.json(result.recordset);
+    } catch (error) {
+      console.error('Error al obtener técnicos:', error);
+      res.status(500).json({ error: 'Error al obtener técnicos' });
+    }
+  });
+
+/*actualizar estados del ticket */
+app.post('/updateStatus', async (req, res) => {
+  const { ticketId, status } = req.body;
+
+  try {
+    let pool = await sql.connect(config);
+    await pool.request()
+      .input('ticketId', sql.Int, ticketId)
+      .input('status', sql.VarChar, status)
+      .query(`
+        UPDATE Reportes
+        SET Status = @status
+        WHERE Id = @ticketId
+      `);
+
+    res.status(200).json({ message: 'Estado actualizado exitosamente' });
+  } catch (error) {
+    console.error('Error al actualizar el estado:', error);
+    res.status(500).json({ error: 'Error al actualizar el estado' });
+  }
+});
+
+
+/*funciono para hacer la asignacion de tickets a tecnicos */
+app.post('/assignTechnicianToTask', async (req, res) => {
+    const { technicianId, ticketId } = req.body;
+  
+    // Validar que technicianId y ticketId no sean nulos
+    if (!technicianId || !ticketId) {
+      return res.status(400).json({ error: 'technical_id y ticket_id son requeridos' });
+    }
+  
+    try {
+      let pool = await sql.connect(config);
+  
+      await pool.request()
+        .input('technical_id', sql.Int, technicianId)
+        .input('ticket_id', sql.Int, ticketId)
+        .query(`
+          INSERT INTO TechnicalTask (technical_id, ticket_id)
+          VALUES (@technical_id, @ticket_id)
+        `);
+  
+      res.status(200).json({ message: 'Técnico asignado a la tarea exitosamente' });
+    } catch (error) {
+      console.error('Error al asignar el técnico a la tarea:', error);
+      res.status(500).json({ error: 'Error al asignar el técnico a la tarea' });
+    }
+  });
+  
+  /*funcnion para que los tecnicos miren los tickets asignados */
+  app.get('/getTechnicalTasks', async (req, res) => {
+    const { userId } = req.query; // Obtener el userId de los parámetros de la solicitud
+
+    // Verificar que userId sea un número válido
+    if (!userId || isNaN(userId)) {
+        return res.status(400).json({ error: 'userId inválido' });
+    }
+
+    try {
+        let pool = await sql.connect(config);
+        
+        // Consulta para obtener los datos de TechnicalTask con la información adicional requerida
+        let result = await pool.request()
+            .input('userId', sql.Int, userId)  // Filtrar por UsuarioId
+            .query(`
+                SELECT 
+                    TT.ticket_id,
+                    TT.assigned_date,
+                    R.DescripcionProblema,
+                    R.TipoProblema,
+                    R.FechaIncidente,
+                    R.Frecuencia,
+                    R.Status,
+                    U.UserName
+                FROM 
+                    TechnicalTask TT
+                INNER JOIN 
+                    Reportes R ON TT.ticket_id = R.Id
+                INNER JOIN 
+                    Usuarios U ON TT.technical_id = U.Id
+                WHERE 
+                    TT.technical_id = @userId; 
+            `);
+
+        // Devuelve los resultados al frontend
+        res.json(result.recordset);
+    } catch (error) {
+        console.error('Error al obtener las tareas técnicas:', error);
+        res.status(500).json({ error: 'Error al obtener las tareas técnicas' });
+    }
+});
+
+  
 // Iniciar el servidor en el puerto 3001
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);

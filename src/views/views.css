@@ -251,3 +251,233 @@ body.report-page-background {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* stillreport.css */
+
+/* Estilos para el contenedor principal */
+.report-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilos para cada tarjeta (ticket) */
+.ticket-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  width: calc(33% - 20px); /* Ajusta para que se muestren 3 cards por fila */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ticket-header {
+  font-size: 18px;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+.ticket-body {
+  margin-bottom: 15px;
+}
+
+.ticket-info {
+  margin-bottom: 5px;
+}
+
+.ticket-info span {
+  font-weight: bold;
+}
+
+.ticket-status {
+  font-weight: bold;
+  text-transform: capitalize;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  color: #fff;
+}
+
+.ticket-status.pendiente {
+  background-color: #FFA500;
+}
+
+.ticket-status.completado {
+  background-color: #4CAF50;
+}
+
+.ticket-status.en-proceso {
+  background-color: #2196F3;
+}
+
+.ticket-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .ticket-card {
+    width: 100%; /* Cada card ocupará todo el ancho en pantallas pequeñas */
+  }
+}
+/*estilos para fondo de stillreport*/
+body.still-report-background {
+  background-image: url('https://i.pinimg.com/564x/09/64/a7/0964a7c66f449a148686bc265eaeaec8.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.report-header{
+  color:#ddd;
+  text-align: center;
+}
+
+/*estilos para fondo de bandreports*/
+body.band-report-background {
+  background-image: url('https://i.pinimg.com/564x/09/64/a7/0964a7c66f449a148686bc265eaeaec8.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+
+
+
+
+/* Estilos generales para el ticket card */
+.ticket-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Encabezado del ticket */
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #28a745;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Información del ticket */
+.ticket-info {
+  font-size: 0.95em;
+  margin-bottom: 5px;
+}
+
+.ticket-info span {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estado del ticket */
+.ticket-status {
+  background-color: #ffa500;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+/* Botón de asignar */
+.assign-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.assign-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para la lista de técnicos */
+.technician-list {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.technician-list h3 {
+  color: #007bff;
+  font-size: 1em;
+  margin-bottom: 8px;
+}
+
+.technician-item {
+  padding: 5px 10px;
+  font-size: 0.9em;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.technician-item:hover {
+  background-color: #e6f7ff;
+  border-radius: 3px;
+}
+
+/* Estilos para el menú desplegable de estado */
+.status-select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 0.9em;
+  color: #333;
+  cursor: pointer;
+  background-color: #f1f1f1;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/*colores para los estados del ticket*/
+/* Estado visto */
+.ticket-status.visto {
+  background-color: #00bfff; /* Celeste */
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+/* Estado solventado */
+.ticket-status.solventado {
+  background-color: #28a745; /* Verde */
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px 0;
+}

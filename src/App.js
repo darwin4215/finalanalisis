@@ -7,6 +7,7 @@ import ReportPage from './views/reportPage';
 import StillReport from './views/stillreport';
 import BandReport from './views/bandreports';
 import PaMientra from './views/pamientras';
+import TaskTech from './views/tasktech';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/stillReport' element={<StillReport />} />
         <Route path='/bandReports' element={<BandReport />} />
         <Route path='/pamientras' element={< PaMientra />} />
+        <Route path="/taskTech" element={<TaskTech />} />
       </Routes>
     </Router>
     

@@ -42,7 +42,7 @@ const HomePage = () => {
         <section className="cards-section">
           {/* Siempre mostrar estas 2 cards para cualquier tipo de usuario */}
           <div className="card card-reach" onClick={() => navigate('/reportPage')} >
-            <h3>Reporte Incovenientes</h3>
+            <h3>Crear Reporte</h3>
           </div>
           <div className="card card-conversations" onClick={() => navigate('/stillreport')}>
             <h3>Seguimiento de Reporte</h3>
@@ -55,7 +55,14 @@ const HomePage = () => {
                 <h3>Bandeja Reportes</h3>
               </div>
               <div className="card card-conversations" onClick={() => navigate('/pamientras')}>
-                <h3>Mientras Tanto</h3>
+                <h3>Chat WhatsApp</h3>
+              </div>
+            </>
+          )}
+          {userRole === 'Tecnico' && (
+            <>
+              <div className="card card-conversations" onClick={() => navigate('/tasktech')}>
+                <h3>Mis Tareas</h3>
               </div>
             </>
           )}
