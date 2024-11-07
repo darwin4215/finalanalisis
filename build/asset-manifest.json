@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.27c696c9.chunk.css",
-    "main.js": "/static/js/main.36a54aae.chunk.js",
-    "main.js.map": "/static/js/main.36a54aae.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.66990ebe.js",
-    "runtime~main.js.map": "/static/js/runtime~main.66990ebe.js.map",
-    "static/js/2.f85e184d.chunk.js": "/static/js/2.f85e184d.chunk.js",
-    "static/js/2.f85e184d.chunk.js.map": "/static/js/2.f85e184d.chunk.js.map",
-    "static/js/3.2ebb6cf0.chunk.js": "/static/js/3.2ebb6cf0.chunk.js",
-    "static/js/3.2ebb6cf0.chunk.js.map": "/static/js/3.2ebb6cf0.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.6dd49f638c500f2a731398b832b1fae6.js": "/precache-manifest.6dd49f638c500f2a731398b832b1fae6.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.27c696c9.chunk.css.map": "/static/css/main.27c696c9.chunk.css.map"
+    "main.css": "/finalanalisis/build/static/css/main.27c696c9.chunk.css",
+    "main.js": "/finalanalisis/build/static/js/main.36a54aae.chunk.js",
+    "main.js.map": "/finalanalisis/build/static/js/main.36a54aae.chunk.js.map",
+    "runtime~main.js": "/finalanalisis/build/static/js/runtime~main.ed58910d.js",
+    "runtime~main.js.map": "/finalanalisis/build/static/js/runtime~main.ed58910d.js.map",
+    "static/js/2.f85e184d.chunk.js": "/finalanalisis/build/static/js/2.f85e184d.chunk.js",
+    "static/js/2.f85e184d.chunk.js.map": "/finalanalisis/build/static/js/2.f85e184d.chunk.js.map",
+    "static/js/3.2ebb6cf0.chunk.js": "/finalanalisis/build/static/js/3.2ebb6cf0.chunk.js",
+    "static/js/3.2ebb6cf0.chunk.js.map": "/finalanalisis/build/static/js/3.2ebb6cf0.chunk.js.map",
+    "index.html": "/finalanalisis/build/index.html",
+    "precache-manifest.91d9f72eb32a411de65f82642f3bd7de.js": "/finalanalisis/build/precache-manifest.91d9f72eb32a411de65f82642f3bd7de.js",
+    "service-worker.js": "/finalanalisis/build/service-worker.js",
+    "static/css/main.27c696c9.chunk.css.map": "/finalanalisis/build/static/css/main.27c696c9.chunk.css.map"
   }
 }
